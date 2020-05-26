@@ -62,7 +62,7 @@
   {:then values}
     {#each values as value}
       {#if value.Alimento}
-        <a href={$url(`/${category}/${value.Alimento}`)}>{value.Alimento} <span>&rarr;</span></a>
+        <a href={$url(`/${category}/${encodeURIComponent(value.Alimento)}`)}>{value.Alimento} <span>&rarr;</span></a>
       {/if}
     {/each}
   {/await}
