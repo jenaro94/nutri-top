@@ -1,6 +1,6 @@
 <script>
   import { onMount  } from 'svelte'
-  import { params, url } from '@sveltech/routify'
+  import { params, url, goto } from '@sveltech/routify'
   let items = null
   const { category } = $params
 
@@ -20,6 +20,7 @@
   }
 
   onMount(() => {
+    if (!spanishName[category]) return $goto('/')
     items = fetch(`https://nutri.jenaro.dev/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}`).then(blob => blob.json())
   })
 
