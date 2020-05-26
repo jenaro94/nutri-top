@@ -2,7 +2,7 @@
   "name": "nutri-top",
   "version": "1.0.0",
   "scripts": {
-    "build": "routify -b && rollup -c",
+    "build": "routify -b && rollup -c && cp _redirects build/_redirects",
     "dev": "routify -c my-server",
     "my-server": "rollup -c -w",
     "start": "sirv public --single"
