@@ -20,12 +20,12 @@
   }
 
   onMount(() => {
-    items = fetch(`http://localhost:4000/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}`).then(blob => blob.json())
+    items = fetch(`http://67.205.169.194:49160/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}`).then(blob => blob.json())
   })
 
   const fetchItems = async (e) => {
     if (!e.target.name.value) return
-    items = fetch(`http://localhost:4000/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}/${e.target.name.value}`).then(blob => blob.json())
+    items = fetch(`http://67.205.169.194:49160/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}/${e.target.name.value}`).then(blob => blob.json())
   }
 </script>
 
