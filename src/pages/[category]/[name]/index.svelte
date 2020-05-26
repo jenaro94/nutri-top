@@ -6,7 +6,7 @@
   let cantidad = 100
 
   onMount(() => {
-    item = fetch(`https://nutri.jenaro.dev/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}/${name}`).then(blob => blob.json())
+    item = fetch(`https://nutri.jenaro.dev/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}/${name.replace(/%%/g, '%25%')}`).then(blob => blob.json())
   })
 
   const filterKeys = (arr) => arr.filter(key => !['field4', 'Nº', 'Alimento', 'Género - especie - variedad'].includes(key))
@@ -25,7 +25,7 @@
   .title, .value {
     padding: 0.5rem 1rem;
     margin: 0;
-    height: 3rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -45,6 +45,7 @@
   }
 
   .value.key {
+    text-align: center;
     background-color: #3C0E2F22;
   }
 
@@ -53,7 +54,7 @@
   }
 </style>
 
-<h1>{name.split('%20').join(' ')}</h1>
+<h1>{decodeURIComponent(name)}</h1>
 
 <label for="cantidad">
   Cantidad (g/ml):
@@ -68,15 +69,31 @@
       <div class="table-container">
         <div class="col">
           {#each filterKeys(Object.keys(values[0])) as header}
-            <p class="title">{header}</p>
+            {#if typeof values[0][header] === "object"}
+              {#each Object.keys(values[0][header]) as subKey}
+                <p class="title">{header}</p>
+              {/each}
+            {/if}
+            {#if typeof values[0][header] !== "object"}
+              <p class="title">{header}</p>
+            {/if}
           {/each}
         </div>
           {#each values as value}
             <div class="col values">
               {#each filterKeys(Object.keys(value)) as key}
-                <p class={!isNaN(parseInt(value[key] || '0')) ? "value" : "value key"}>
-                  {!isNaN(parseInt(value[key] || '0')) ? simpleThree(cantidad, value[key]) : value[key]}
-                </p>
+                {#if typeof value[key] === "object"}
+                  {#each Object.keys(value[key]) as subKey}
+                    <p class={!isNaN(parseInt(value[key][subKey] || '0')) ? "value" : "value key"}>
+                      {!isNaN(parseInt(value[key][subKey] || '0')) ? simpleThree(cantidad, value[key][subKey]) : `${subKey} (${value[key][subKey]})`}
+                    </p>
+                  {/each}
+                {/if}
+                {#if typeof value[key] !== "object"}
+                  <p class={!isNaN(parseInt(value[key] || '0')) ? "value" : "value key"}>
+                    {!isNaN(parseInt(value[key] || '0')) ? simpleThree(cantidad, value[key]) : value[key]}
+                  </p>
+                {/if}
               {/each}
             </div>
           {/each}
