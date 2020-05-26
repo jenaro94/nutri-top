@@ -6,7 +6,7 @@
   let cantidad = 100
 
   onMount(() => {
-    item = fetch(`http://67.205.169.194:49160/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}/${name}`).then(blob => blob.json())
+    item = fetch(`https://nutri.jenaro.dev/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}/${name}`).then(blob => blob.json())
   })
 
   const filterKeys = (arr) => arr.filter(key => !['field4', 'Nº', 'Alimento', 'Género - especie - variedad'].includes(key))
