@@ -58,7 +58,7 @@
 
 <label for="cantidad">
   Cantidad (g/ml):
-  <input name="cantidad" bind:value={cantidad} />
+  <input name="cantidad" bind:value={cantidad} type="number"/>
 </label>
 
 {#if item}
