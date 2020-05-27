@@ -5,79 +5,43 @@
 <style>
   nav {
     width: 100%;
-    height: calc(100vh - 16px);
     display: flex;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: center;
   }
 
   nav a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-    position: relative;
-    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    line-height: 2;
+    display: block;
+    padding: 2rem;
+    border: 1px solid var(--purple);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
   }
 
-  nav a::after {
-    content: '';
-    position: absolute;
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
+  h1 {
+    text-transform: uppercase;
+    line-height: 2;
+    text-align: center;
   }
 
-  img {
-    width: 40px;
-    height: 40px;
+  .container {
+    width: 75%;
+    margin: 0 auto;
   }
 </style>
 
-<nav>
-  <a href={$url("/egg")}>
-    <img src="images/egg.png" alt="Huevo." />
-    Huevo
-  </a>
-  <a href={$url("/vegetable")}>
-      <img src="images/carrot.png"  alt="Vegetal."/>
-      Vegetal
+<div class="container">
+  <h1>Elegi la fuente que queres usar:</h1>
+  <nav>
+    <a href={$url("/longo")}>
+      Tecnica Dietoterapica, Elsa Longo, Elizabeth Navarro
     </a>
-  <a href={$url("/cereal")}>
-    <img src="images/cereal.png" alt="Cereal."/>
-    Cereal
-  </a>
-  <a href={$url("/fat")}>
-    <img src="images/hamburger.png" alt="Grasas." />
-    Grasas
-  </a>
-  <a href={$url("/fish")}>
-    <img src="images/fish.png" alt="Pescado." />
-    Pescado
-  </a>
-  <a href={$url("/meat")}>
-    <img src="images/meat.png" alt="Carne." />
-    Carne
-  </a>
-  <a href={$url("/fruit")}>
-    <img src="images/lemon.png" alt="Fruta." />
-    Fruta
-  </a>
-  <a href={$url("/milk")}>
-    <img src="images/milk.png" alt="Leche." />
-    Leche
-  </a>
-  <a href={$url("/misc")}>
-    <img src="images/popcorn.png" alt="Misc." />
-    Misc
-  </a>
-  <a href={$url("/prod-az")}>
-    <img src="images/lollipop.png" alt="Prod AZ." />
-    Prod AZ
-  </a>
-</nav>
+    <a href={$url("/lujan")}>
+      Universidad Nacional de Lujan
+    </a>
+  </nav>
+</div>

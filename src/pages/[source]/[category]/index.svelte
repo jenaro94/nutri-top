@@ -2,7 +2,7 @@
   import { onMount  } from 'svelte'
   import { params, url, goto } from '@sveltech/routify'
   let items = null
-  const { category } = $params
+  const { source, category } = $params
 
   const spanishName = {
     egg: 'Huevo',
@@ -21,12 +21,12 @@
 
   onMount(() => {
     if (!spanishName[category]) return $goto('/')
-    items = fetch(`https://nutri.jenaro.dev/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}`).then(blob => blob.json())
+    items = fetch(`https://nutri.jenaro.dev/${source === 'longo' ? 'longo/' : ''}${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}`).then(blob => blob.json())
   })
 
   const fetchItems = async (e) => {
     if (!e.target.name.value) return
-    items = fetch(`https://nutri.jenaro.dev/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}/${e.target.name.value}`).then(blob => blob.json())
+    items = fetch(`https://nutri.jenaro.dev/${source === 'longo' ? 'longo/' : ''}${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}/${e.target.name.value}`).then(blob => blob.json())
   }
 </script>
 
@@ -63,7 +63,7 @@
   {:then values}
     {#each values as value}
       {#if value.Alimento}
-        <a href={$url(`/${category}/${encodeURIComponent(value.Alimento)}`)}>{value.Alimento} <span>&rarr;</span></a>
+        <a href={$url(`/${source}/${category}/${encodeURIComponent(value.Alimento)}`)}>{value.Alimento} <span>&rarr;</span></a>
       {/if}
     {/each}
   {/await}

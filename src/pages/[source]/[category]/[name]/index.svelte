@@ -1,12 +1,12 @@
 <script>
   import { onMount } from 'svelte'
   import { params, url } from '@sveltech/routify'
-  const { category, name } = $params
+  const { source, category, name } = $params
   let item = null
   let cantidad = 100
 
   onMount(() => {
-    item = fetch(`https://nutri.jenaro.dev/${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}/${name.replace(/%%/g, '%25%')}`).then(blob => blob.json())
+    item = fetch(`https://nutri.jenaro.dev/${source === 'longo' ? 'longo/' : ''}${category.split('-').map((p,i) => i === 1 ? p.toUpperCase() : p).join('')}/${name.replace(/%%/g, '%25%')}`).then(blob => blob.json())
   })
 
   const filterKeys = (arr) => arr.filter(key => !['field4', 'Nº', 'Alimento', 'Género - especie - variedad'].includes(key))
