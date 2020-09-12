@@ -12,7 +12,7 @@
   const filterKeys = (arr) => arr.filter(key => !['field4', 'Nº', 'Alimento', 'Género - especie - variedad'].includes(key))
 
   const simpleThree = (cantidad, value) => {
-    return Math.round((cantidad * value) / 100)
+    return ((cantidad * value) / 100).toFixed(2)
   }
 </script>
 
